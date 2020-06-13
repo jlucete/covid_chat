@@ -25,6 +25,8 @@ class App extends Component {
       playerStyle: {display: "block"},
       classTitle: "1학년 1반",
       isPlayerRendered: false,
+      userName: "",
+      isLogin: false,
     };
   }
 
@@ -33,12 +35,14 @@ class App extends Component {
       window.alert("쉬는시간입니다");
       this.setState({
         classTitle: "쉬는 쉬간",
+        isBreakTime: true,
       });
     }
     else if (readData === "!break"){
       window.alert("수업시간입니다");
       this.setState({
         classTitle: "수학",
+        isBreakTime: false,
       });
     }
     else if(readData.substring(0,4) === "http"){
@@ -70,6 +74,10 @@ class App extends Component {
         commandValue: "",
         videoID: "",
         playerStyle: {display: "none"},
+        classTitle: "1학년 1반",
+        isPlayerRendered: false,
+        userName: "",
+        isLogin: false,
       })
     }
   }
@@ -101,7 +109,7 @@ class App extends Component {
       const time = today.getHours()+":"+min+":"+sec;
       const newItem = {
         time: time,
-        writer: '나',
+        writer: this.state.userName,
         chatValue: chatValue.slice(1, chatValue.length),
         chatThreadList: [],
       }
@@ -130,7 +138,7 @@ class App extends Component {
           };
           const newItem = {
             popupStyle: popupStyle,
-            writer: '나',
+            writer: this.state.userName,
             chatValue: chatValue,
           };
           if(!chat2DList){
@@ -204,7 +212,7 @@ class App extends Component {
         // 2. Make new item for thread chat list
       const newThreadChat = {
         time: time,
-        writer: '나',
+        writer: this.state.userName,
         chatValue: chatThreadValue,
       }
       if (chatThreadList){
@@ -265,6 +273,22 @@ class App extends Component {
     e.preventDefault();
   }
 
+  loginDoChange (e) {
+    const newValue = e.target.value;
+    this.setState({userName: newValue});
+  }
+
+  loginDoSubmit(e) {
+    if(this.state.userName===""){
+      window.alert("유효하지 않은 이름입니다");
+    }
+    else{
+      this.setState({
+        isLogin: true,
+      });
+    }
+    e.preventDefault();
+  }
   render() {
     const chat1DdoSubmit = (e) => this.chat1DdoSubmit(e);
     const chat1DdoChange = (e) => this.chat1DdoChange(e);
@@ -272,14 +296,24 @@ class App extends Component {
     const chatThreadDoChange = (e) => this.chatThreadDoChange(e);
     const commandDoChange = (e) => this.commandDoChange(e);
     const commandDoSubmit = (e) => this.commandDoSubmit(e);
+    const loginDoSubmit = (e) => this.loginDoSubmit(e);
+    const loginDoChange = (e) => this.loginDoChange(e);
 
-    const content_div = (this.state.isPlayerRendered? 
-      <Content videoID = {this.state.videoID} playerStyle={this.state.playerStyle}/>:
-      <Content videoID = {this.state.videoID} playerStyle={this.state.playerStyle}/> );
-    if(this.state.isPlayerRendered === false){
-      this.setState({
-        isPlayerRendered: true,
-      });
+    if(!this.state.isLogin){
+      return (
+        <div className="App">
+          <div className="App-loginTitle">온라인 웹 교실</div>
+          <span className="App-loginInput">
+            <form onSubmit={loginDoSubmit}>
+              <input type= "text" 
+                  className="App-loginInputBox" 
+                  value={this.state.userName} 
+                  onChange={loginDoChange}
+                  placeholder="이름을 입력해주세요"/>
+            </form>
+          </span>
+        </div>
+      )
     }
     return (
     <div className="App">
@@ -302,7 +336,7 @@ class App extends Component {
         <Blackboard />
       </div>
       <div className="App-content">
-        {content_div}
+        <Content videoID = {this.state.videoID} playerStyle={this.state.playerStyle}/>
       </div>
       <div className="App-ChatThread">
         <ChatThread chatList={this.state.chatThreadList}

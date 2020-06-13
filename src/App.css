@@ -39,5 +39,24 @@
   top: 3vh;
 }
 
+.App-loginTitle {
+  text-align: center;
+  padding-top: 30vh;
+  padding-bottom: 5vh;
+  width: 100vw;
+  font-size: 80px;
+}
+
+.App-loginInput {
+  text-align: center;
+}
+.App-loginInputBox {
+  text-align: center;
+  width: 400px;
+  height: 6vh;
+  font-size: 30px;
+}
+
+
 
 
