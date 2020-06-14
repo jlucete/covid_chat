@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "guest",
+      username: "",
       chatValue: "",
       chatThreadValue: "",
       chatThreadIndex: null,
@@ -30,7 +30,7 @@ class App extends Component {
       playerStyle: {display: "none"},
       classTitle: "1학년 1반",
       isPlayerRendered: false,
-      isLogin: true,
+      isLogin: false,
     };
   }
 
@@ -228,12 +228,6 @@ class App extends Component {
     e.preventDefault();
   }
 
-  componentDidMount() {
-    this.props.enterChatroom({
-      username: this.state.username
-    });
-  }
-
   componentDidUpdate() {
     const remove = this.state.remove;
     if (remove !== 0) {
@@ -271,16 +265,19 @@ class App extends Component {
 
   loginDoChange (e) {
     const newValue = e.target.value;
-    this.setState({userName: newValue});
+    this.setState({username: newValue});
   }
 
   loginDoSubmit(e) {
-    if(this.state.userName===""){
+    if(this.state.username===""){
       window.alert("유효하지 않은 이름입니다");
     }
     else{
       this.setState({
         isLogin: true,
+      });
+      this.props.enterChatroom({
+        username: this.state.username
       });
     }
     e.preventDefault();
@@ -303,7 +300,7 @@ class App extends Component {
             <form onSubmit={loginDoSubmit}>
               <input type= "text" 
                   className="App-loginInputBox" 
-                  value={this.state.userName} 
+                  value={this.state.username} 
                   onChange={loginDoChange}
                   placeholder="이름을 입력해주세요"/>
             </form>
@@ -324,7 +321,7 @@ class App extends Component {
         
         <span className="App-profile">
           <img className="App-profileImage" src={profile}/>
-          <span className="App-userName">{this.state.userName}</span>
+          <span className="App-userName">{this.state.username}</span>
         </span>
       </div>
       <span className="App-Command">
@@ -342,7 +339,9 @@ class App extends Component {
             notice={this.props.chatReducer.notice}
           />
         </div>
-        <div className="App-content">{content_div}</div>
+        <div className="App-content">
+          <Content videoID = {this.state.videoID} playerStyle={this.state.playerStyle}/>
+        </div>
         <div className="App-ChatThread">
           <ChatThread
             chatList={this.props.chatReducer.chatThreadList}
