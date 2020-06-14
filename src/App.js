@@ -1,11 +1,14 @@
-import React, { Component } from "react";
-import "./App.css";
-import Chat1D from "./Chat1D";
-import Chat2D from "./Chat2D";
-import Blackboard from "./Blackboard";
-import ChatThread from "./ChatThread";
-import Content from "./Content";
-import Clock from "./Clock";
+
+import React, { Component } from 'react';
+import './App.css';
+import Chat1D from './Chat1D'
+import Chat2D from './Chat2D'
+import Blackboard from './Blackboard'
+import ChatThread from './ChatThread'
+import Content from './Content'
+import logo from './icons/blackboard.png'
+import profile from './icons/profile_male.png'
+
 
 class App extends Component {
   constructor(props) {
@@ -23,10 +26,11 @@ class App extends Component {
       isBreakTime: false,
       users: [],
       commandValue: "",
-      videoID: "hF_lIqruUeQ",
-      playerStyle: { display: "block" },
+      videoID: "",
+      playerStyle: {display: "none"},
       classTitle: "1학년 1반",
-      isPlayerRendered: false
+      isPlayerRendered: false,
+      isLogin: true,
     };
   }
 
@@ -34,12 +38,14 @@ class App extends Component {
     if (readData === "break") {
       window.alert("쉬는시간입니다");
       this.setState({
-        classTitle: "쉬는 쉬간"
+        classTitle: "쉬는 쉬간",
+        isBreakTime: true,
       });
     } else if (readData === "!break") {
       window.alert("수업시간입니다");
       this.setState({
-        classTitle: "수학"
+        classTitle: "수학",
+        isBreakTime: false,
       });
     } else if (readData.substring(0, 4) === "http") {
       var videoID = readData.match(
@@ -70,8 +76,11 @@ class App extends Component {
         isBreakTime: false,
         commandValue: "",
         videoID: "",
-        playerStyle: { display: "none" }
-      });
+        playerStyle: {display: "none"},
+        classTitle: "1학년 1반",
+        isPlayerRendered: false,
+        isLogin: false,
+      })
     }
   }
 
@@ -210,6 +219,7 @@ class App extends Component {
       this.setState({
         chatThreadList: newChat1DList[chatThreadIndex].chatThreadList
       });
+
     }
     this.setState({
       chatThreadValue: "",
@@ -259,47 +269,73 @@ class App extends Component {
     e.preventDefault();
   }
 
-  render() {
-    const chat1DdoSubmit = e => this.chat1DdoSubmit(e);
-    const chat1DdoChange = e => this.chat1DdoChange(e);
-    const chatThreadDoSubmit = e => this.chatThreadDoSubmit(e);
-    const chatThreadDoChange = e => this.chatThreadDoChange(e);
-    const commandDoChange = e => this.commandDoChange(e);
-    const commandDoSubmit = e => this.commandDoSubmit(e);
+  loginDoChange (e) {
+    const newValue = e.target.value;
+    this.setState({userName: newValue});
+  }
 
-    const content_div = this.state.isPlayerRendered ? (
-      <Content
-        videoID={this.state.videoID}
-        playerStyle={this.state.playerStyle}
-      />
-    ) : (
-      <Content
-        videoID={this.state.videoID}
-        playerStyle={this.state.playerStyle}
-      />
-    );
-    if (this.state.isPlayerRendered === false) {
+  loginDoSubmit(e) {
+    if(this.state.userName===""){
+      window.alert("유효하지 않은 이름입니다");
+    }
+    else{
       this.setState({
-        isPlayerRendered: true
+        isLogin: true,
       });
     }
+    e.preventDefault();
+  }
+  render() {
+    const chat1DdoSubmit = (e) => this.chat1DdoSubmit(e);
+    const chat1DdoChange = (e) => this.chat1DdoChange(e);
+    const chatThreadDoSubmit = (e) => this.chatThreadDoSubmit(e);
+    const chatThreadDoChange = (e) => this.chatThreadDoChange(e);
+    const commandDoChange = (e) => this.commandDoChange(e);
+    const commandDoSubmit = (e) => this.commandDoSubmit(e);
+    const loginDoSubmit = (e) => this.loginDoSubmit(e);
+    const loginDoChange = (e) => this.loginDoChange(e);
+
+    if(!this.state.isLogin){
+      return (
+        <div className="App">
+          <div className="App-loginTitle">온라인 웹 교실</div>
+          <span className="App-loginInput">
+            <form onSubmit={loginDoSubmit}>
+              <input type= "text" 
+                  className="App-loginInputBox" 
+                  value={this.state.userName} 
+                  onChange={loginDoChange}
+                  placeholder="이름을 입력해주세요"/>
+            </form>
+          </span>
+        </div>
+      )
+    }
     return (
-      <div className="App">
-        <span className="App-clock">
-          <Clock />
+    <div className="App">
+      <div className="App-topBar">
+        <img className="App-logo" src={logo} alt="blackboard"/>
+        <span className="App-title">
+          온라인 웹 교실
         </span>
-        <span className="App-classTitle">{this.state.classTitle}</span>
-        <span className="App-Command">
+        <span className="App-classTitle">
+          {this.state.classTitle}
+        </span>
+        
+        <span className="App-profile">
+          <img className="App-profileImage" src={profile}/>
+          <span className="App-userName">{this.state.userName}</span>
+        </span>
+      </div>
+      <span className="App-Command">
           <form onSubmit={commandDoSubmit}>
-            <input
-              type="text"
-              className="AppCommandInput"
-              value={this.state.commandValue}
-              onChange={commandDoChange}
-              placeholder="명령을 입력해주세요"
-            />
+            <input type= "text" 
+                className="AppCommandInput" 
+                value={this.state.commandValue} 
+                onChange={commandDoChange}
+                placeholder="수업용 URL을 입력해주세요"/>
           </form>
-        </span>
+      </span>
         <div className="App-Blackboard">
           <Blackboard
             sendNotice={this.props.sendNotice}

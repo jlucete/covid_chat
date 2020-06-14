@@ -5,7 +5,6 @@
   left: 69vw;
   width: 30vw;
   height: 50vh;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
 }
 
@@ -13,11 +12,12 @@
   z-Index: 1;
   padding: 5px;
   position: absolute;
-  border: 1px solid;
+  border-radius: 5px;
   max-width: 15vw;
   text-align: center;
   vertical-align: middle;
   background: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .Chat2D-popup-writer {

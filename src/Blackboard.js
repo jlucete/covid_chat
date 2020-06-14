@@ -12,7 +12,7 @@ class Blackboard extends Component {
   }
   blackboardDoFix() {
     this.setState({
-      inputBoxDisplay: "block"
+      inputBoxDisplay: "inline-block",
     });
   }
   blackboardDoSubmit() {
@@ -24,9 +24,9 @@ class Blackboard extends Component {
       });
     } else {
       this.setState({
-        inputBoxDisplay: "block",
-        buttonValue: "적용"
-      });
+        inputBoxDisplay: "inline-block",
+        buttonValue: "적용",
+      })
     }
   }
   blackboardDoChange(e) {
@@ -40,14 +40,9 @@ class Blackboard extends Component {
     };
     return (
       <div className="Blackboard-layout">
-        <div className="Blackboard-title">공지사항</div>
-        <button
-          className="Blackboard-updateButton"
-          onClick={() => this.blackboardDoSubmit()}
-        >
-          {this.state.buttonValue}
-        </button>
-        <pre className="Blackboard-notice">{this.state.notice}</pre>
+        <div className="Blackboard-title" >공지사항</div>
+        <button className="Blackboard-updateButton" onClick={()=>(this.blackboardDoSubmit())}>{this.state.buttonValue}</button>
+        <div className="Blackboard-notice">{this.state.notice}</div>
         <textarea
           className="Blackboard-inputBox"
           value={this.state.notice}

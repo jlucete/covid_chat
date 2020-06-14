@@ -1,11 +1,13 @@
 .ChatThread-layout {
+  background-color: white;
   position: absolute;
   z-index: 0;
-  top: 63vh;
-  left: 69vw;
-  width: 30vw;
-  height: 25vh;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+  top: 68vh;
+  left: 62.5vw;
+  width: 36.5vw;
+  height: 30vh;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .ChatThread-topic {
@@ -21,11 +23,23 @@
   z-index: 1;
   top: 70px;
   left: 0.5vw;
-  width: 29.5vw;
-  height: calc(24vh - 70px);
+  width: 35vw;
+  height: calc(23vh - 70px);
   overflow: auto;
 }
+.ChatThread-container::-webkit-scrollbar {
+  width: 10px;
+}
 
+.ChatThread-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+.ChatThread-container::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 10px;
+}
 .ChatThread-title {
   text-align: center;
 }

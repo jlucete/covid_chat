@@ -28,7 +28,7 @@ class Content extends Component {
         <div className ="Content-player" style={this.props.playerStyle}>
           <YoutubePlayer
             videoId={this.props.videoID}
-            playbackState='playing'
+            playbackState='unstarted'
             configuration={
                 {
                     showinfo: 0,
