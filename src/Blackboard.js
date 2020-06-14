@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import './Blackboard.css';
+import React, { Component } from "react";
+import "./Blackboard.css";
 
 class Blackboard extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      notice : "",
+      notice: "",
       inputBoxDisplay: "none",
-      buttonValue: "수정",
+      buttonValue: "수정"
     };
   }
   blackboardDoFix() {
@@ -16,39 +16,39 @@ class Blackboard extends Component {
     });
   }
   blackboardDoSubmit() {
-    if(this.state.buttonValue === "적용"){
+    this.props.sendNotice({ notice: this.state.notice });
+    if (this.state.buttonValue === "적용") {
       this.setState({
         inputBoxDisplay: "none",
-        buttonValue: "수정",
-      })
-    }
-    else{
+        buttonValue: "수정"
+      });
+    } else {
       this.setState({
         inputBoxDisplay: "inline-block",
         buttonValue: "적용",
       })
     }
   }
-  blackboardDoChange (e) {
+  blackboardDoChange(e) {
     const newValue = e.target.value;
-    this.setState({notice: newValue});
+    this.setState({ notice: newValue });
   }
   render() {
-    const blackboardDoChange = (e) => this.blackboardDoChange(e);
+    const blackboardDoChange = e => this.blackboardDoChange(e);
     const inputBoxStyle = {
-      display: this.state.inputBoxDisplay,
-    }
+      display: this.state.inputBoxDisplay
+    };
     return (
       <div className="Blackboard-layout">
         <div className="Blackboard-title" >공지사항</div>
         <button className="Blackboard-updateButton" onClick={()=>(this.blackboardDoSubmit())}>{this.state.buttonValue}</button>
         <div className="Blackboard-notice">{this.state.notice}</div>
         <textarea
-            className="Blackboard-inputBox" 
-            value={this.state.notice}
-            onChange={blackboardDoChange}
-            style={inputBoxStyle}
-            />
+          className="Blackboard-inputBox"
+          value={this.state.notice}
+          onChange={blackboardDoChange}
+          style={inputBoxStyle}
+        />
       </div>
     );
   }

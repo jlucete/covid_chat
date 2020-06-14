@@ -71,7 +71,6 @@
   border-style: none;
   border-radius: 10px;
   height: 30px;
-  
 }
 
 .AppCommandInput {
@@ -116,13 +115,13 @@
 .App-loginInput {
   text-align: center;
 }
+
 .App-loginInputBox {
   text-align: center;
   width: 400px;
   height: 6vh;
   font-size: 30px;
 }
-
 
 
 
