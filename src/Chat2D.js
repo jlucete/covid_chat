@@ -18,7 +18,6 @@ class Chat2D extends Component {
       <div>
         {popups}
         <div className="Chat2D-layout">
-          <div className="Chat2D-title">2D채팅방</div>
         </div>
       </div>
     )

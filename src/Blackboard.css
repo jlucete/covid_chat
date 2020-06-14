@@ -5,7 +5,6 @@
   left: 1vw;
   width: 20vw;
   height: 50vh;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .Blackboard-fixButton {
@@ -31,7 +30,7 @@
   top: 70px;
   width: 18.5vw;
   height: calc(44.5vh - 40px);
-  overflow: auto;
+  overflow-y: auto;
   font-size: 25px;
 }
 .Blackboard-notice {
@@ -39,10 +38,11 @@
   position: absolute;
   z-index: 1;
   left: 0.5vw;
-  top: 50px;
+  top: 70px;
   width: 18.5vw;
   height: calc(44.5vh - 40px);
-  overflow: auto;
+  word-break: break-all;
+  overflow-x: auto;
   font-size: 25px;
 }
 

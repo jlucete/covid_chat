@@ -5,7 +5,8 @@ import Chat2D from './Chat2D'
 import Blackboard from './Blackboard'
 import ChatThread from './ChatThread'
 import Content from './Content'
-import Clock from './Clock'
+import logo from './icons/blackboard.png'
+import profile from './icons/profile_male.png'
 
 class App extends Component {
   constructor(props) {
@@ -21,12 +22,12 @@ class App extends Component {
       scrollIndex: "o",
       isBreakTime: false,
       commandValue: "",
-      videoID: "hF_lIqruUeQ",
-      playerStyle: {display: "block"},
+      videoID: "",
+      playerStyle: {display: "none"},
       classTitle: "1학년 1반",
       isPlayerRendered: false,
-      userName: "",
-      isLogin: false,
+      userName: "조재건",
+      isLogin: true,
     };
   }
 
@@ -317,20 +318,28 @@ class App extends Component {
     }
     return (
     <div className="App">
-      <span className="App-clock">
-        <Clock />
-      </span>
-      <span className="App-classTitle">
-        {this.state.classTitle}
-      </span>
+      <div className="App-topBar">
+        <img className="App-logo" src={logo} alt="blackboard"/>
+        <span className="App-title">
+          온라인 웹 교실
+        </span>
+        <span className="App-classTitle">
+          {this.state.classTitle}
+        </span>
+        
+        <span className="App-profile">
+          <img className="App-profileImage" src={profile}/>
+          <span className="App-userName">{this.state.userName}</span>
+        </span>
+      </div>
       <span className="App-Command">
-        <form onSubmit={commandDoSubmit}>
-          <input type= "text" 
-              className="AppCommandInput" 
-              value={this.state.commandValue} 
-              onChange={commandDoChange}
-              placeholder="명령을 입력해주세요"/>
-        </form>
+          <form onSubmit={commandDoSubmit}>
+            <input type= "text" 
+                className="AppCommandInput" 
+                value={this.state.commandValue} 
+                onChange={commandDoChange}
+                placeholder="수업용 URL을 입력해주세요"/>
+          </form>
       </span>
       <div className="App-Blackboard">
         <Blackboard />

@@ -1,43 +1,109 @@
-.App-ChatInput {
+.App {
   position: absolute;
-  top: 90vh;
-  left: 1vw;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.chatInput {
-  text-align: left;
-  width: 66.5vw;
-  height: 50px;
-  
+  background-color: rgba(0,0,0,0.05);
+  width: 100vw;
+  height: 100vh;
+  top:0vw;
+  left:0vh;
 }
 
-.AppCommandInput {
-  position: absolute;
-  width : 20vw;
-  top: 1vh;
-  left: 79vw;
+.App-logo {
+  padding-left: 1vw;
+  padding-top: 1vh;
+  height: 8vh;
 }
 
-.App-ChatThreadInput {
+.App-title {
   position: absolute;
-  top: 90vh;
-  left: 69vw;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.chatThreadInput {
-  text-align: left;
-  width: 29.5vw;
-  height: 50px;
+  font-weight: 900;
+  font-size: 4vh;
+  padding-top: 2vh;
+  padding-left: 2vh;
 }
 
 .App-classTitle {
   position: absolute;
   text-align: center;
   font-size: 4vh;
+  font-weight: 900;
   width: 100vw;
-  top: 3vh;
+  top: 2vh;
+  left: 0vw;
 }
+
+.App-profile {
+  position: absolute;
+  text-align: right;
+  width: 98vw;
+  top: 1vh;
+  left: 0vw;
+}
+.App-profileImage {
+  padding-top: 1vh;
+  height: 6vh;
+}
+.App-userName {
+  position: relative;
+  top: -1vh;
+  font-size: 4vh;
+  font-weight: 900;
+}
+
+.App-topBar {
+  position: absolute;
+  background-color: white;
+  top: 0vh;
+  left: 0vw;
+  width: 100vw;
+  height: 10vh;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.App-ChatInput {
+  position: absolute;
+  top: 92vh;
+  left: 2vw;
+}
+.chatInput {
+  background-color: rgba(0,0,0,0.05);
+  text-align: left;
+  width: 58vw;
+  border-style: none;
+  border-radius: 10px;
+  height: 30px;
+  
+}
+
+.AppCommandInput {
+  position: absolute;
+  z-index: 2;
+  width : 20vw;
+  top: 59vh;
+  left: 26vw;
+  background-color: rgba(0,0,0,0.05);
+  text-align: left;
+  width: 48vw;
+  border-style: none;
+  border-radius: 10px;
+  height: 30px;
+}
+
+.App-ChatThreadInput {
+  position: absolute;
+  top: 92vh;
+  left: 63.5vw;
+}
+
+.chatThreadInput {
+  background-color: rgba(0,0,0,0.05);
+  text-align: left;
+  width: 34.5vw;
+  border-style: none;
+  border-radius: 10px;
+  height: 30px;
+}
+
+
 
 .App-loginTitle {
   text-align: center;
